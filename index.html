@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rental Application — 823 S Walts Ave, Sioux Falls SD</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 28px 20px 22px;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .header p  { font-size: 0.85rem; opacity: 0.7; }
+
+    .terms-banner {
+      background: #eef2ff;
+      border-left: 4px solid #4f46e5;
+      margin: 20px 16px 0;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .terms-banner h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #4f46e5; margin-bottom: 8px; }
+    .terms-banner ul { list-style: none; }
+    .terms-banner li { font-size: 0.9rem; padding: 3px 0; }
+    .terms-banner li::before { content: "•  "; color: #4f46e5; font-weight: bold; }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      margin: 16px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .card-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4f46e5;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e2e6ea;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #1a1a2e;
+      background: #fafbfc;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    @media (max-width: 480px) {
+      .row-2, .row-3 { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+    .radio-group label {
+      display: flex; align-items: center; gap-8px;
+      font-size: 1rem; font-weight: 400;
+      text-transform: none; letter-spacing: 0;
+      color: #1a1a2e; cursor: pointer;
+    }
+    .radio-group input[type="radio"] {
+      width: 18px; height: 18px; margin-right: 6px;
+      accent-color: #4f46e5;
+    }
+
+    .disclosure-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .disclosure-row select { width: 90px; flex-shrink: 0; }
+    .disclosure-row .explain { flex: 1; }
+    .disclosure-row .explain label { margin-bottom: 0; }
+    .disclosure-q {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .auth-text {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: calc(100% - 32px);
+      margin: 8px 16px 0;
+      padding: 16px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #4338ca; }
+    .submit-btn:active { background: #3730a3; }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+
+    /* Formspree thank-you redirect handled by _next param */
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Rental Application</h1>
+  <p>823 S Walts Ave &nbsp;·&nbsp; Sioux Falls, SD 57103</p>
+</div>
+
+<div class="terms-banner">
+  <h3>Rental Terms</h3>
+  <ul>
+    <li>$1,950 / month — furnished</li>
+    <li>Utilities not included (tenant pays)</li>
+    <li>Lawn &amp; snow removal available: +$150/mo</li>
+    <li>12-month South Dakota residential lease</li>
+  </ul>
+</div>
+
+<form
+  action="https://formspree.io/f/northgrid.node@icloud.com"
+  method="POST"
+>
+  <!-- Redirect after submit -->
+  <input type="hidden" name="_next" value="https://northgridnode.github.io/walts-rental/thanks.html" />
+  <input type="hidden" name="_subject" value="New Rental Application — 823 S Walts Ave" />
+  <input type="hidden" name="Property" value="823 S Walts Ave, Sioux Falls SD" />
+
+  <!-- ── 1. PERSONAL INFO ── -->
+  <div class="card">
+    <div class="card-title">1 · Personal Information</div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" name="First Name" required autocomplete="given-name" />
+      </div>
+      <div class="field">
+        <label>Last Name *</label>
+        <input type="text" name="Last Name" required autocomplete="family-name" />
+      </div>
+    </div>
+
+    <div class="row-3">
+      <div class="field">
+        <label>Date of Birth *</label>
+        <input type="date" name="Date of Birth" required />
+      </div>
+      <div class="field">
+        <label>Phone *</label>
+        <input type="tel" name="Phone" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" name="Email" required autocomplete="email" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Social Security Number</label>
+      <input type="text" name="SSN" placeholder="XXX-XX-XXXX" />
+    </div>
+
+    <div class="field">
+      <label>Desired Move-In Date *</label>
+      <input type="date" name="Move-In Date" required />
+    </div>
+
+    <div class="field">
+      <label>Lawn &amp; Snow Removal (+$150/mo)?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="Lawn Snow" value="Yes" /> Yes, add it</label>
+        <label><input type="radio" name="Lawn Snow" value="No" checked /> No thanks</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. CURRENT ADDRESS ── -->
+  <div class="card">
+    <div class="card-title">2 · Current Address</div>
+
+    <div class="field">
+      <label>Street Address *</label>
+      <input type="text" name="Current Street" required autocomplete="street-address" />
+    </div>
+
+    <div class="row-3">
+      <div class="field">
+        <label>City *</label>
+        <input type="text" name="Current City" required autocomplete="address-level2" />
+      </div>
+      <div class="field">
+        <label>State *</label>
+        <input type="text" name="Current State" required autocomplete="address-level1" maxlength="2" placeholder="SD" />
+      </div>
+      <div class="field">
+        <label>ZIP *</label>
+        <input type="text" name="Current ZIP" required autocomplete="postal-code" />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Monthly Rent Paid</label>
+        <input type="text" name="Current Rent" placeholder="$" />
+      </div>
+      <div class="field">
+        <label>How Long at This Address?</label>
+        <input type="text" name="Current Duration" placeholder="e.g. 2 years" />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Landlord Name</label>
+        <input type="text" name="Current Landlord Name" />
+      </div>
+      <div class="field">
+        <label>Landlord Phone</label>
+        <input type="tel" name="Current Landlord Phone" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Reason for Leaving</label>
+      <input type="text" name="Reason for Leaving Current" />
+    </div>
+  </div>
+
+  <!-- ── 3. PREVIOUS ADDRESS ── -->
+  <div class="card">
+    <div class="card-title">3 · Previous Address (if less than 2 years at current)</div>
+
+    <div class="field">
+      <label>Street Address</label>
+      <input type="text" name="Previous Street" />
+    </div>
+
+    <div class="row-3">
+      <div class="field">
+        <label>City</label>
+        <input type="text" name="Previous City" />
+      </div>
+      <div class="field">
+        <label>State</label>
+        <input type="text" name="Previous State" maxlength="2" />
+      </div>
+      <div class="field">
+        <label>ZIP</label>
+        <input type="text" name="Previous ZIP" />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Landlord Name</label>
+        <input type="text" name="Previous Landlord Name" />
+      </div>
+      <div class="field">
+        <label>Landlord Phone</label>
+        <input type="tel" name="Previous Landlord Phone" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Reason for Leaving</label>
+      <input type="text" name="Reason for Leaving Previous" />
+    </div>
+  </div>
+
+  <!-- ── 4. EMPLOYMENT ── -->
+  <div class="card">
+    <div class="card-title">4 · Employment &amp; Income</div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Employer Name *</label>
+        <input type="text" name="Employer" required />
+      </div>
+      <div class="field">
+        <label>Job Title *</label>
+        <input type="text" name="Job Title" required />
+      </div>
+    </div>
+
+    <div class="row-3">
+      <div class="field">
+        <label>Start Date</label>
+        <input type="date" name="Employment Start" />
+      </div>
+      <div class="field">
+        <label>Gross Monthly Income *</label>
+        <input type="text" name="Monthly Income" required placeholder="$" />
+      </div>
+      <div class="field">
+        <label>Supervisor Phone</label>
+        <input type="tel" name="Supervisor Phone" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Additional Income Sources (if any)</label>
+      <textarea name="Additional Income" placeholder="e.g. part-time work, benefits, child support…"></textarea>
+    </div>
+  </div>
+
+  <!-- ── 5. PETS & VEHICLES ── -->
+  <div class="card">
+    <div class="card-title">5 · Pets &amp; Vehicles</div>
+
+    <div class="field">
+      <label>Do you have pets?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="Has Pets" value="Yes" /> Yes</label>
+        <label><input type="radio" name="Has Pets" value="No" checked /> No</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>If yes — describe (type, breed, weight)</label>
+      <input type="text" name="Pet Description" />
+    </div>
+
+    <div class="field">
+      <label>Number of Vehicles</label>
+      <input type="number" name="Vehicles" min="0" max="5" placeholder="0" />
+    </div>
+
+    <div class="field">
+      <label>Vehicle Details (make, model, plate)</label>
+      <input type="text" name="Vehicle Details" />
+    </div>
+  </div>
+
+  <!-- ── 6. DISCLOSURES ── -->
+  <div class="card">
+    <div class="card-title">6 · Disclosures</div>
+
+    <div class="field">
+      <p class="disclosure-q">Have you ever been evicted or asked to vacate a rental?</p>
+      <div class="disclosure-row">
+        <select name="Eviction">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+        <div class="explain">
+          <input type="text" name="Eviction Explanation" placeholder="If yes, please explain" />
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <p class="disclosure-q">Have you filed for bankruptcy in the last 7 years?</p>
+      <div class="disclosure-row">
+        <select name="Bankruptcy">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+        <div class="explain">
+          <input type="text" name="Bankruptcy Explanation" placeholder="If yes, please explain" />
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <p class="disclosure-q">Have you been convicted of a felony?</p>
+      <div class="disclosure-row">
+        <select name="Felony">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+        <div class="explain">
+          <input type="text" name="Felony Explanation" placeholder="If yes, please explain" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. AUTHORIZATION ── -->
+  <div class="card">
+    <div class="card-title">7 · Authorization</div>
+
+    <p class="auth-text">
+      By submitting this application I authorize the landlord to verify the information provided,
+      including credit history, rental history, employment, and criminal records.
+      I certify that all information is true and complete to the best of my knowledge.
+      False information may result in denial of this application or termination of tenancy.
+    </p>
+
+    <div class="field">
+      <label>Full Legal Name (acts as signature) *</label>
+      <input type="text" name="Signature" required placeholder="Type your full name" />
+    </div>
+
+    <div class="field">
+      <label>Today's Date *</label>
+      <input type="date" name="Signature Date" required />
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn">Submit Application →</button>
+  <p class="footer-note">Your information is submitted securely directly to the landlord.</p>
+
+</form>
+
+</body>
+</html>
