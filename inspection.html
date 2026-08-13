@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Move-In/Out Inspection — 823 S Walts Ave</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      padding: 0 0 60px;
+    }
+
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .header p  { font-size: 0.85rem; opacity: 0.7; }
+
+    .type-banner {
+      display: flex;
+      gap: 12px;
+      margin: 16px 16px 0;
+    }
+    .type-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 10px;
+      border: 2px solid #e2e6ea;
+      background: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .type-btn.active {
+      border-color: #4f46e5;
+      color: #4f46e5;
+      background: #f0f1ff;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      margin: 16px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .card-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4f46e5;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e2e6ea;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #1a1a2e;
+      background: #fafbfc;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 64px; }
+
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 480px) {
+      .row-2, .row-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Room inspection rows */
+    .room-item {
+      display: grid;
+      grid-template-columns: 130px 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+    }
+    .room-item .item-label {
+      font-weight: 500;
+      color: #444;
+    }
+    .room-item select,
+    .room-item input {
+      padding: 8px 10px;
+      border: 1.5px solid #e2e6ea;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: #fafbfc;
+      color: #1a1a2e;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    @media (max-width: 520px) {
+      .room-item { grid-template-columns: 1fr; }
+      .room-item .item-label { font-weight: 600; font-size: 0.8rem; margin-bottom: -4px; }
+    }
+
+    .room-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      display: grid;
+      grid-template-columns: 130px 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+    @media (max-width: 520px) { .room-header { display: none; } }
+
+    /* Inventory table */
+    .inv-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+    .inv-row input, .inv-row select {
+      padding: 8px 10px;
+      border: 1.5px solid #e2e6ea;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: #fafbfc;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    .inv-header {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #999;
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      gap: 8px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    .add-row-btn {
+      background: none;
+      border: 1.5px dashed #c7c8f5;
+      color: #4f46e5;
+      border-radius: 8px;
+      padding: 8px;
+      width: 100%;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .sig-input {
+      font-family: "Segoe Script", "Bradley Hand", "Brush Script MT", cursive !important;
+      font-size: 1.2rem !important;
+    }
+
+    .submit-btn {
+      display: block;
+      width: calc(100% - 32px);
+      margin: 8px 16px 0;
+      padding: 16px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #4338ca; }
+
+    .condition-good { color: #166534; }
+    .condition-fair { color: #92400e; }
+    .condition-poor { color: #991b1b; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Property Inspection &amp; Inventory</h1>
+  <p>823 S Walts Ave &nbsp;·&nbsp; Sioux Falls, SD 57104</p>
+</div>
+
+<!-- Move-In / Move-Out Toggle -->
+<div class="type-banner">
+  <div class="type-btn active" onclick="setType('move-in', this)">📦 Move-In</div>
+  <div class="type-btn" onclick="setType('move-out', this)">🚪 Move-Out</div>
+</div>
+<input type="hidden" id="inspectionType" value="Move-In" />
+
+<form action="https://api.web3forms.com/submit" method="POST" id="inspForm">
+  <input type="hidden" name="access_key" value="646eef27-c048-4b16-ba7f-a686430c2da8" />
+  <input type="hidden" name="subject" id="formSubject" value="Move-In Inspection — 823 S Walts Ave" />
+  <input type="hidden" name="redirect" value="https://northgridnode.github.io/walts-rental/inspection-submitted.html" />
+  <input type="hidden" name="Property" value="823 S Walts Ave, Sioux Falls SD 57104" />
+  <input type="hidden" name="Inspection Type" id="inspTypeField" value="Move-In" />
+
+  <!-- ── INFO ── -->
+  <div class="card">
+    <div class="card-title">Inspection Details</div>
+    <div class="row-2">
+      <div class="field">
+        <label>Inspection Date *</label>
+        <input type="date" name="Inspection Date" id="inspDate" required />
+      </div>
+      <div class="field">
+        <label>Tenant Name(s) *</label>
+        <input type="text" name="Tenant Names" value="Thomas Potter &amp; Haley Christmann" required />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Landlord Present</label>
+        <input type="text" name="Landlord Present" value="Matthew Hummel" />
+      </div>
+      <div class="field">
+        <label>Keys Provided</label>
+        <input type="text" name="Keys" placeholder="e.g. 2 door keys, 1 mailbox key" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXTERIOR ── -->
+  <div class="card">
+    <div class="card-title">Exterior &amp; Common Areas</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <!-- rows -->
+    <div class="room-item"><span class="item-label">Front Door / Lock</span><select name="Ext Front Door"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Front Door Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Exterior Walls</span><select name="Ext Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Driveway / Parking</span><select name="Ext Driveway"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Driveway Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lawn / Landscaping</span><select name="Ext Lawn"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Lawn Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Garage / Shed</span><select name="Ext Garage"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Garage Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Deck / Patio</span><select name="Ext Deck"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Ext Deck Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── LIVING ROOM ── -->
+  <div class="card">
+    <div class="card-title">Living Room</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls</span><select name="LR Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="LR Floors"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Ceiling</span><select name="LR Ceiling"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Ceiling Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Windows / Blinds</span><select name="LR Windows"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Windows Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Fixtures</span><select name="LR Lights"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Lights Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Outlets / Switches</span><select name="LR Outlets"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="LR Outlets Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── KITCHEN ── -->
+  <div class="card">
+    <div class="card-title">Kitchen</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls / Cabinets</span><select name="Kit Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="Kit Floors"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Countertops</span><select name="Kit Counter"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Counter Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Sink / Faucet</span><select name="Kit Sink"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Sink Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Refrigerator</span><select name="Kit Fridge"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Fridge Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Stove / Oven</span><select name="Kit Stove"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Stove Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Dishwasher</span><select name="Kit Dishwasher"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Dishwasher Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Microwave</span><select name="Kit Microwave"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Microwave Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Outlets</span><select name="Kit Lights"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Kit Lights Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── BEDROOM 1 ── -->
+  <div class="card">
+    <div class="card-title">Bedroom 1</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls</span><select name="BR1 Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="BR1 Floors"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Ceiling</span><select name="BR1 Ceiling"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Ceiling Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Windows / Blinds</span><select name="BR1 Windows"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Windows Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Closet</span><select name="BR1 Closet"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Closet Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Outlets</span><select name="BR1 Lights"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR1 Lights Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── BEDROOM 2 ── -->
+  <div class="card">
+    <div class="card-title">Bedroom 2</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls</span><select name="BR2 Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="BR2 Floors"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Ceiling</span><select name="BR2 Ceiling"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Ceiling Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Windows / Blinds</span><select name="BR2 Windows"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Windows Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Closet</span><select name="BR2 Closet"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Closet Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Outlets</span><select name="BR2 Lights"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BR2 Lights Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── BATHROOM 1 ── -->
+  <div class="card">
+    <div class="card-title">Bathroom 1</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls / Tile</span><select name="BA1 Walls"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="BA1 Floors"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Toilet</span><select name="BA1 Toilet"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Toilet Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Sink / Vanity</span><select name="BA1 Sink"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Sink Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Tub / Shower</span><select name="BA1 Shower"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Shower Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Fan</span><select name="BA1 Lights"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="BA1 Lights Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── BATHROOM 2 ── -->
+  <div class="card">
+    <div class="card-title">Bathroom 2 <span style="font-size:0.75rem;font-weight:400;color:#999;">(if applicable)</span></div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">Walls / Tile</span><select name="BA2 Walls"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Walls Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Floors</span><select name="BA2 Floors"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Floors Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Toilet</span><select name="BA2 Toilet"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Toilet Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Sink / Vanity</span><select name="BA2 Sink"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Sink Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Tub / Shower</span><select name="BA2 Shower"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Shower Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Lights / Fan</span><select name="BA2 Lights"><option>N/A</option><option>Good</option><option>Fair</option><option>Poor</option></select><input type="text" name="BA2 Lights Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── SYSTEMS ── -->
+  <div class="card">
+    <div class="card-title">Systems &amp; Mechanicals</div>
+    <div class="room-header"><span>Item</span><span>Condition</span><span>Notes</span></div>
+    <div class="room-item"><span class="item-label">HVAC / Furnace</span><select name="Sys HVAC"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Sys HVAC Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Water Heater</span><select name="Sys Water Heater"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Sys Water Heater Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Washer / Dryer</span><select name="Sys Laundry"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Sys Laundry Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">Smoke Detectors</span><select name="Sys Smoke"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Sys Smoke Notes" placeholder="Notes" /></div>
+    <div class="room-item"><span class="item-label">CO Detectors</span><select name="Sys CO"><option>Good</option><option>Fair</option><option>Poor</option><option>N/A</option></select><input type="text" name="Sys CO Notes" placeholder="Notes" /></div>
+  </div>
+
+  <!-- ── FURNITURE INVENTORY ── -->
+  <div class="card">
+    <div class="card-title">Furnished Item Inventory</div>
+    <div class="inv-header"><span>Item / Description</span><span>Qty</span><span>Condition &amp; Notes</span></div>
+    <div id="invRows">
+      <div class="inv-row"><input type="text" name="Inv Item 1" placeholder="e.g. Sofa (gray, 3-seat)" /><input type="number" name="Inv Qty 1" placeholder="1" min="1" /><input type="text" name="Inv Cond 1" placeholder="Good / Fair / Poor + notes" /></div>
+      <div class="inv-row"><input type="text" name="Inv Item 2" placeholder="e.g. Dining table + 4 chairs" /><input type="number" name="Inv Qty 2" placeholder="1" min="1" /><input type="text" name="Inv Cond 2" placeholder="Good / Fair / Poor + notes" /></div>
+      <div class="inv-row"><input type="text" name="Inv Item 3" placeholder="e.g. Queen bed frame + mattress" /><input type="number" name="Inv Qty 3" placeholder="1" min="1" /><input type="text" name="Inv Cond 3" placeholder="Good / Fair / Poor + notes" /></div>
+      <div class="inv-row"><input type="text" name="Inv Item 4" placeholder="e.g. Dresser" /><input type="number" name="Inv Qty 4" placeholder="1" min="1" /><input type="text" name="Inv Cond 4" placeholder="Good / Fair / Poor + notes" /></div>
+      <div class="inv-row"><input type="text" name="Inv Item 5" placeholder="e.g. TV + mount" /><input type="number" name="Inv Qty 5" placeholder="1" min="1" /><input type="text" name="Inv Cond 5" placeholder="Good / Fair / Poor + notes" /></div>
+    </div>
+    <button type="button" class="add-row-btn" onclick="addInvRow()">+ Add Item</button>
+  </div>
+
+  <!-- ── ADDITIONAL NOTES ── -->
+  <div class="card">
+    <div class="card-title">Additional Notes</div>
+    <div class="field">
+      <label>General Comments / Existing Damage</label>
+      <textarea name="Additional Notes" placeholder="Note any pre-existing damage, missing items, or special conditions..."></textarea>
+    </div>
+  </div>
+
+  <!-- ── SIGNATURES ── -->
+  <div class="card">
+    <div class="card-title">Signatures</div>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:16px;line-height:1.5;">
+      By signing below, both parties confirm this inspection report accurately reflects the condition of the property and inventory on the date noted above.
+    </p>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Landlord Signature *</label>
+        <input class="sig-input" type="text" name="Landlord Signature" placeholder="Matthew Hummel" required />
+      </div>
+      <div class="field">
+        <label>Date *</label>
+        <input type="date" name="Landlord Sig Date" required />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Tenant 1 Signature *</label>
+        <input class="sig-input" type="text" name="Tenant 1 Signature" placeholder="Thomas Potter" required />
+      </div>
+      <div class="field">
+        <label>Date *</label>
+        <input type="date" name="Tenant 1 Sig Date" required />
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label>Tenant 2 Signature</label>
+        <input class="sig-input" type="text" name="Tenant 2 Signature" placeholder="Haley Christmann" />
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" name="Tenant 2 Sig Date" />
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn">Submit Inspection Report →</button>
+  <p style="text-align:center;font-size:0.75rem;color:#999;margin-top:14px;padding:0 20px;">
+    A copy of this report will be sent to the landlord and kept on file.
+  </p>
+
+</form>
+
+<script>
+  // Auto-fill today's date
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(el => el.value = today);
+
+  function setType(type, btn) {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const label = type === 'move-in' ? 'Move-In' : 'Move-Out';
+    document.getElementById('inspTypeField').value = label;
+    document.getElementById('formSubject').value = label + ' Inspection — 823 S Walts Ave';
+    document.getElementById('inspectionType').value = label;
+  }
+
+  let invCount = 5;
+  function addInvRow() {
+    invCount++;
+    const row = document.createElement('div');
+    row.className = 'inv-row';
+    row.innerHTML = `
+      <input type="text" name="Inv Item ${invCount}" placeholder="Item description" />
+      <input type="number" name="Inv Qty ${invCount}" placeholder="1" min="1" />
+      <input type="text" name="Inv Cond ${invCount}" placeholder="Condition + notes" />
+    `;
+    document.getElementById('invRows').appendChild(row);
+  }
+</script>
+
+</body>
+</html>
