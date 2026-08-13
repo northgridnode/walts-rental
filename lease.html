@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lease Agreement — 823 S Walts Ave</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      padding: 0 0 60px;
+    }
+
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .header h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .header p  { font-size: 0.85rem; opacity: 0.7; }
+
+    .lease-body {
+      background: #fff;
+      margin: 20px 16px;
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #222;
+    }
+
+    .lease-body h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 24px 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .lease-body h2:first-child { margin-top: 0; }
+
+    .lease-body p { margin-bottom: 10px; }
+
+    .lease-body .kv {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 4px 12px;
+      margin-bottom: 12px;
+    }
+    .lease-body .kv .k { font-weight: 600; color: #555; }
+
+    .divider {
+      border: none;
+      border-top: 2px solid #e8eaf0;
+      margin: 32px 0;
+    }
+
+    /* Signature section */
+    .sig-section {
+      background: #fff;
+      margin: 0 16px 20px;
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .sig-section h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4f46e5;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .agree-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #f0f1ff;
+      border: 1.5px solid #c7c8f5;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+    .agree-box input[type="checkbox"] {
+      width: 20px; height: 20px;
+      margin-top: 2px;
+      accent-color: #4f46e5;
+      flex-shrink: 0;
+    }
+    .agree-box label {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .sig-block { margin-bottom: 28px; }
+    .sig-block h3 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e2e6ea;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #1a1a2e;
+      background: #fafbfc;
+      -webkit-appearance: none;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: #4f46e5;
+      background: #fff;
+    }
+    .field input.sig-input {
+      font-family: "Segoe Script", "Bradley Hand", "Brush Script MT", cursive;
+      font-size: 1.3rem;
+      color: #1a1a2e;
+      letter-spacing: 0.02em;
+    }
+
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 480px) { .row-2 { grid-template-columns: 1fr; } }
+
+    .submit-btn {
+      display: block;
+      width: calc(100% - 32px);
+      margin: 0 16px;
+      padding: 16px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #4338ca; }
+    .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 16px;
+      padding: 0 20px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Residential Lease Agreement</h1>
+  <p>823 S Walts Ave &nbsp;·&nbsp; Sioux Falls, SD 57104 &nbsp;·&nbsp; Sept 1, 2026 – Aug 31, 2027</p>
+</div>
+
+<!-- ── LEASE TEXT ── -->
+<div class="lease-body">
+
+  <h2>Parties</h2>
+  <div class="kv">
+    <span class="k">Landlord</span><span>Matthew Hummel</span>
+    <span class="k">Tenant(s)</span><span>Thomas Potter and Haley Christmann, jointly and severally</span>
+  </div>
+
+  <h2>Property</h2>
+  <p>The Landlord hereby leases to Tenant the furnished residential property located at <strong>823 S Walts Ave, Sioux Falls, SD 57104</strong> ("Premises").</p>
+
+  <h2>Lease Term</h2>
+  <p>This Agreement commences on <strong>September 1, 2026</strong> and terminates on <strong>August 31, 2027</strong>, unless sooner terminated in accordance with the terms herein.</p>
+
+  <h2>Rent</h2>
+  <div class="kv">
+    <span class="k">Monthly Rent</span><span>$1,950.00</span>
+    <span class="k">Due Date</span><span>1st of each calendar month</span>
+    <span class="k">Payment</span><span>Zelle to <strong>deployedinvestmentllc@gmail.com</strong></span>
+    <span class="k">Grace Period</span><span>5 days</span>
+    <span class="k">Late Fee</span><span>$100.00 flat fee assessed on the 6th of the month</span>
+  </div>
+
+  <h2>Security Deposit</h2>
+  <p>Tenant shall pay a security deposit of <strong>$1,950.00</strong> (one month's rent) prior to move-in. The deposit shall be held and returned in accordance with South Dakota law (SDCL § 43-32-6.1 et seq.) within two weeks of Tenant vacating, less any lawful deductions.</p>
+
+  <h2>Furnished Premises</h2>
+  <p>The Premises are rented furnished. A written inventory of all furnished items and their condition shall be completed and signed by both parties during the move-in walkthrough and attached as <strong>Exhibit A — Furnished Inventory</strong>. Tenant shall be responsible for any damage beyond normal wear and tear.</p>
+
+  <h2>Utilities</h2>
+  <p>Tenant is responsible for establishing and paying all utilities in Tenant's name, including electricity, gas, water/sewer, trash, and internet. Landlord is not responsible for utility service interruptions.</p>
+
+  <h2>Lawn, Snow Removal & Exterior Maintenance</h2>
+  <p>Tenant is responsible for all lawn care and snow removal throughout the Lease Term, including mowing, edging, leaf removal, and snow/ice removal from walkways and driveways. Failure to maintain the exterior may result in Landlord arranging service at Tenant's expense with written notice.</p>
+
+  <h2>Occupants</h2>
+  <p>Only Thomas Potter and Haley Christmann are authorized to reside at the Premises. No additional occupants are permitted without prior written consent of the Landlord.</p>
+
+  <h2>Guests</h2>
+  <p>Guests may stay at the Premises for no more than <strong>14 consecutive days</strong> or <strong>30 days total in any 12-month period</strong> without prior written approval from the Landlord. Guests exceeding these limits shall be considered unauthorized occupants.</p>
+
+  <h2>Pets</h2>
+  <p>No pets are permitted on the Premises without prior written consent of the Landlord. Unauthorized pets are grounds for lease termination.</p>
+
+  <h2>Smoking Policy</h2>
+  <p>Smoking of any substance (tobacco, marijuana, or electronic cigarettes/vaping) is <strong>prohibited inside the Premises</strong>. Smoking is permitted outside only, at a reasonable distance from the structure and windows. Tenant shall be responsible for any damage or odor caused by indoor smoking.</p>
+
+  <h2>Subletting & Assignment</h2>
+  <p>Tenant may not sublet the Premises, assign this Agreement, or permit any other person to occupy the Premises without prior written consent of the Landlord. Unauthorized subletting is grounds for immediate termination.</p>
+
+  <h2>Renter's Insurance</h2>
+  <p>Tenant shall obtain and maintain a renter's insurance policy throughout the Lease Term with a minimum of <strong>$100,000 in personal liability coverage</strong>. Proof of insurance shall be provided to Landlord prior to move-in and upon renewal. Landlord's insurance does not cover Tenant's personal property or liability.</p>
+
+  <h2>Early Termination</h2>
+  <p>Should Tenant terminate this Agreement prior to the end of the Lease Term, Tenant shall provide a minimum of <strong>30 days written notice</strong> and pay an early termination fee of <strong>$3,900.00 (two months' rent)</strong>. This fee does not release Tenant from liability for rent owed through the end of the notice period.</p>
+
+  <h2>Landlord Entry</h2>
+  <p>Landlord shall provide a minimum of <strong>24 hours' advance notice</strong> before entering the Premises, except in cases of emergency.</p>
+
+  <h2>Maintenance & Repairs</h2>
+  <p>Tenant shall maintain the Premises in a clean, sanitary condition and promptly notify Landlord of any needed repairs. Tenant is responsible for minor repairs under $100 caused by Tenant's negligence. Landlord is responsible for maintaining the Premises in habitable condition per South Dakota law.</p>
+
+  <h2>Alterations</h2>
+  <p>Tenant shall make no alterations, additions, or improvements without prior written consent of the Landlord. All approved alterations become the property of the Landlord upon termination unless otherwise agreed in writing.</p>
+
+  <h2>Parking</h2>
+  <p>Tenant is permitted to park <strong>one (1) vehicle</strong> on the Premises. Tenant shall not park on the lawn or in unauthorized areas.</p>
+
+  <h2>Joint and Several Liability</h2>
+  <p>All Tenants signing this Agreement are jointly and severally liable for all obligations, including rent, damages, and fees.</p>
+
+  <h2>Holdover</h2>
+  <p>If Tenant remains after lease expiration without written consent of Landlord, such holdover constitutes a month-to-month tenancy at the same rent and terms. Either party may terminate with <strong>30 days written notice</strong>.</p>
+
+  <h2>Notices</h2>
+  <p>All notices shall be in writing delivered by personal delivery, first-class mail, or email with confirmation of receipt.</p>
+  <div class="kv">
+    <span class="k">Landlord</span><span>deployedinvestmentllc@gmail.com</span>
+    <span class="k">Tenant</span><span>taxasm58@gmail.com | 605-366-2279</span>
+  </div>
+
+  <h2>Governing Law</h2>
+  <p>This Agreement is governed by the laws of the State of South Dakota, including SDCL Title 43, Chapter 32.</p>
+
+  <h2>Entire Agreement</h2>
+  <p>This Agreement, including any attached exhibits, constitutes the entire agreement between the parties. Any modifications must be in writing and signed by both parties.</p>
+
+</div>
+
+<!-- ── SIGNATURE SECTION ── -->
+<div class="sig-section">
+  <h2>Electronic Signatures</h2>
+
+  <div class="agree-box">
+    <input type="checkbox" id="agree" onchange="toggleSubmit()" />
+    <label for="agree">
+      I have read and understand the full Residential Lease Agreement above. By typing my name below, I agree to all terms and conditions and acknowledge this constitutes a legally binding electronic signature under the Uniform Electronic Transactions Act (UETA) and South Dakota law.
+    </label>
+  </div>
+
+  <form action="https://api.web3forms.com/submit" method="POST" id="leaseForm">
+    <input type="hidden" name="access_key" value="646eef27-c048-4b16-ba7f-a686430c2da8" />
+    <input type="hidden" name="subject" value="Lease Signed — 823 S Walts Ave" />
+    <input type="hidden" name="redirect" value="https://northgridnode.github.io/walts-rental/lease-signed.html" />
+    <input type="hidden" name="Property" value="823 S Walts Ave, Sioux Falls SD 57104" />
+    <input type="hidden" name="Lease Term" value="September 1, 2026 – August 31, 2027" />
+    <input type="hidden" name="Monthly Rent" value="$1,950.00" />
+
+    <!-- Tenant 1 -->
+    <div class="sig-block">
+      <h3>Tenant 1 — Thomas Potter</h3>
+      <div class="field">
+        <label>Full Legal Name (Electronic Signature) *</label>
+        <input class="sig-input" type="text" name="Tenant 1 Signature" placeholder="Type full name" required />
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Date *</label>
+          <input type="date" name="Tenant 1 Date" required />
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" name="Tenant 1 Email" placeholder="taxasm58@gmail.com" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- Tenant 2 -->
+    <div class="sig-block">
+      <h3>Co-Tenant — Haley Christmann</h3>
+      <div class="field">
+        <label>Full Legal Name (Electronic Signature) *</label>
+        <input class="sig-input" type="text" name="Tenant 2 Signature" placeholder="Type full name" required />
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Date *</label>
+          <input type="date" name="Tenant 2 Date" required />
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" name="Tenant 2 Email" placeholder="haleychristmann7@gmail.com" required />
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<button class="submit-btn" id="submitBtn" disabled onclick="document.getElementById('leaseForm').submit()">
+  Sign &amp; Submit Lease →
+</button>
+<p class="footer-note">
+  Your electronic signature is legally binding under UETA and South Dakota law.<br/>
+  A copy will be sent to the landlord. Keep a screenshot for your records.
+</p>
+
+<script>
+  // Auto-fill today's date
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(el => el.value = today);
+
+  function toggleSubmit() {
+    const checked = document.getElementById('agree').checked;
+    document.getElementById('submitBtn').disabled = !checked;
+    document.getElementById('submitBtn').style.background = checked ? '#4f46e5' : '#aaa';
+  }
+</script>
+
+</body>
+</html>
